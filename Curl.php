@@ -20,12 +20,6 @@ class Curl {
     
   }
   
-  public function setLogger($logger) {
-    
-    $this->logger = $logger;
-    
-  }
-  
   public function __destruct() {
     
     if($this->ch) {
@@ -43,6 +37,16 @@ class Curl {
     
     $this->ch = curl_init($url);
     $this->url = $url;
+    
+  }
+
+  public function execute() {
+    
+    $microtime = microtime(true);
+    $rsp = curl_exec($this->ch);
+    $microtime = microtime(true) - $microtime;
+    if($this->logger) $this->logger->info("Calling " . $this->url . " in " . $microtime . " got " . $this->getInfo(CURLINFO_HTTP_CODE));
+    return $rsp;
     
   }
   
@@ -102,16 +106,6 @@ class Curl {
     curl_close($this->ch);
     $this->ch = null;
   }
-  
-  public function execute() {
-    
-    $microtime = microtime(true);
-    $rsp = curl_exec($this->ch);
-    $microtime = microtime(true) - $microtime;
-    if($this->logger) $this->logger->info("Calling " . $this->url . " in " . $microtime . " got " . $this->getInfo(CURLINFO_HTTP_CODE));
-    return $rsp;
-    
-  }
 
   public function getError() {
 
@@ -128,6 +122,12 @@ class Curl {
   public function log($msg, $level = null) {
     
     if($this->logger) $this->logger->log($msg, $level);
+    
+  }
+
+  public function setLogger($logger) {
+    
+    $this->logger = $logger;
     
   }
   
