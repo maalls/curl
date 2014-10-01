@@ -1,4 +1,8 @@
 <?php
+/**
+* @author maalls
+* @repo https://github.com/maalls/curl
+**/
 
 class Curl {
   
