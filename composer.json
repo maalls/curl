@@ -1,0 +1,7 @@
+{
+    "name": "maalls/curl",
+    "description": "PHP class for curl.",
+    "require": {
+        "php": ">=5.0.0"
+    }
+}
