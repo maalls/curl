@@ -1,4 +1,6 @@
 <?php
+
+namespace Maalls\Curl;
 /**
 * @author maalls
 * @repo https://github.com/maalls/curl
